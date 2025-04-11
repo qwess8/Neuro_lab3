@@ -19,5 +19,5 @@ print(z)
 a = torch.exp(z)
 print(a)
 
-a.backward()
+a.mean().backward()
 print(x.grad)
