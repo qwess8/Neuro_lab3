@@ -7,7 +7,7 @@ import numpy as np
 
 df = pd.read_csv('d:\Download\data.csv')
 X = torch.Tensor(df.iloc[:, 0:3].values)
-y = df.iloc[:, 4].values
+y = df.iloc[:, [4]].values
 y = torch.Tensor(np.where(y == "Iris-setosa", 1, -1).reshape(-1,1))
 
 linear = nn.Linear(3, 1)
@@ -19,5 +19,6 @@ for i in range(0,5000):
     pred = linear(X)
     loss = lossFn(pred, y)
     print('Ошибка на ' + str(i+1) + ' итерации: ', loss.item())
+    optimizer.zero_grad()
     loss.backward()
     optimizer.step()
